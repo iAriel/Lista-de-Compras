@@ -198,6 +198,8 @@ public class ViewProduto extends javax.swing.JFrame {
       p.setMarca (txtMarca.getText());
       
       tableModel.addRow(p);
+      
+      
      
     }//GEN-LAST:event_jButton1ActionPerformed
 

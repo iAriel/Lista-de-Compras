@@ -5,6 +5,12 @@
  */
 package View;
 
+import Model.Usuario;
+import Model.UsuarioDao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Ariel
@@ -143,6 +149,20 @@ public class ViewCadastro extends javax.swing.JFrame {
 
     private void saveRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveRegisterActionPerformed
         // TODO add your handling code here:
+        //Passando dados para o banco de dados
+        Usuario u = new Usuario();
+        UsuarioDao dao = new UsuarioDao();
+        
+        u.setNome(nameRegister.getText());
+        u.setEmail(emailRegister.getText());
+        u.setSenha(passwordRegister.getText());
+        //NAO CONSIGO DEIXAR SOMENTE O DAO.CREATE
+        try {
+            dao.create(u);
+        } catch (SQLException ex) {
+            System.out.println("Erro aki");
+        }
+        
     }//GEN-LAST:event_saveRegisterActionPerformed
 
     private void cancelRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelRegisterActionPerformed

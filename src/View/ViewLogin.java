@@ -5,6 +5,13 @@
  */
 package View;
 
+import Model.AutenticacaoUserDao;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author Ariel
@@ -146,7 +153,22 @@ public class ViewLogin extends javax.swing.JFrame {
 
     private void enterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterLoginActionPerformed
         // TODO add your handling code here:
-        new ViewProduto().setVisible(true);
+        
+        AutenticacaoUserDao dao = new AutenticacaoUserDao();
+        
+        
+        try {
+            if(dao.checkLogin(emailLogin.getText(), passwordInput.getText())){
+                new ViewProduto().setVisible(true);
+                JOptionPane.showMessageDialog(null, "Login efetuado com sucesso! ");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuário ou Senha incorretos. ");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_enterLoginActionPerformed
 
     /**
