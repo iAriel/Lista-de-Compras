@@ -5,7 +5,7 @@
  */
 package View;
 
-import Model.AutenticacaoUserDao;
+import Dao.UsuarioDao;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +42,7 @@ public class ViewLogin extends javax.swing.JFrame {
         enterLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cadastrarLogin = new javax.swing.JButton();
+        updateSenha = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(251, 229, 180));
@@ -75,6 +76,13 @@ public class ViewLogin extends javax.swing.JFrame {
             }
         });
 
+        updateSenha.setText("ESQUECI A SENHA");
+        updateSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -95,8 +103,7 @@ public class ViewLogin extends javax.swing.JFrame {
                                     .addComponent(emailLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(78, 78, 78)
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel1)))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(32, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -104,6 +111,10 @@ public class ViewLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cadastrarLogin)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(updateSenha)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +133,9 @@ public class ViewLogin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterLogin)
                     .addComponent(cadastrarLogin))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(updateSenha)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -154,11 +167,13 @@ public class ViewLogin extends javax.swing.JFrame {
     private void enterLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterLoginActionPerformed
         // TODO add your handling code here:
         
-        AutenticacaoUserDao dao = new AutenticacaoUserDao();
+        UsuarioDao dao = new UsuarioDao();
         
         
         try {
             if(dao.checkLogin(emailLogin.getText(), passwordInput.getText())){
+                
+               
                 new ViewProduto().setVisible(true);
                 JOptionPane.showMessageDialog(null, "Login efetuado com sucesso! ");
                 this.dispose();
@@ -170,6 +185,14 @@ public class ViewLogin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_enterLoginActionPerformed
+
+    private void updateSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSenhaActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ViewEditUser().setVisible(true);
+        
+        
+    }//GEN-LAST:event_updateSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,5 +238,6 @@ public class ViewLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField passwordInput;
     private javax.swing.JLabel passwordLogin;
+    private javax.swing.JButton updateSenha;
     // End of variables declaration//GEN-END:variables
 }

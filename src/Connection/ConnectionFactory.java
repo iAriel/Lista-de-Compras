@@ -25,7 +25,7 @@ public class ConnectionFactory {
     private static final String USER = "root";
     private static final String PASS = "";
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
 
         try {
             return DriverManager.getConnection(

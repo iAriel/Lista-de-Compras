@@ -10,9 +10,45 @@ package Model;
  * @author Ariel
  */
 public class Produto {
+    private String nome;
+    private String quantidade;
     private String marca;
-    private String produto;
-    private String qtd;
+    private int id;
+    private int id_usuario;
+    
+    public Produto(){}
+
+    public Produto(String nome, String quantidade, String marca, int id, int id_usuario) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.marca = marca;
+        this.id = id;
+        this.id_usuario = id_usuario;
+    }
+    
+    public Produto(String nome, String quantidade, String marca) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+        this.marca = marca; 
+    }
+    
+    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(String quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public String getMarca() {
         return marca;
@@ -22,21 +58,19 @@ public class Produto {
         this.marca = marca;
     }
 
-    public String getProduto() {
-        return produto;
+    public int getId() {
+        return id;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getQtd() {
-        return qtd;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setQtd(String qtd) {
-        this.qtd = qtd;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
-    
-    
 }

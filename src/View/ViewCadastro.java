@@ -6,7 +6,7 @@
 package View;
 
 import Model.Usuario;
-import Model.UsuarioDao;
+import Dao.UsuarioDao;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -5,17 +5,20 @@
  */
 package Model;
 
+import Dao.ProdutoDao;
+
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;        
-
+ 
 /**
  *
  * @author Ariel
  */
 public class ProdutoTableModel extends AbstractTableModel{
 
-    private List<Produto> dados = new ArrayList<>();
+    private ProdutoDao pdtDao = new ProdutoDao();
+    private List<Produto> dados = pdtDao.listProduct();
     private String[] colunas = {"Produto", "Quantidade", "Marca"};
 
     @Override
@@ -44,9 +47,9 @@ public class ProdutoTableModel extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         switch(coluna){
             case 0:
-                return dados.get(linha).getProduto();
+                return dados.get(linha).getNome();
             case 1:
-                return dados.get(linha).getQtd();
+                return dados.get(linha).getQuantidade();
             case 2:
                 return dados.get(linha).getMarca();
         }
@@ -59,10 +62,10 @@ public class ProdutoTableModel extends AbstractTableModel{
          
         switch(coluna){
             case 0:
-                dados.get(linha).setProduto((String) valor);
+                dados.get(linha).setNome((String) valor);
                 break;
             case 1:
-                 dados.get(linha).setQtd((String) valor);
+                 dados.get(linha).setQuantidade((String) valor);
                  break;
             case 2:
                  dados.get(linha).setMarca((String) valor);
