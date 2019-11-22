@@ -88,10 +88,10 @@ public class UsuarioDao {
         try{
             stmt = con.prepareStatement("UPDATE usuario SET senha = ? WHERE email = ?");
  
-            stmt.setString(1, u.getEmail());
-            stmt.setString(2, u.getSenha());
+            stmt.setString(1, u.getSenha());
+            stmt.setString(2, u.getEmail());
             
-            stmt.executeUpdate();
+            stmt.executeUpdate(); 
             
             
             
@@ -99,6 +99,33 @@ public class UsuarioDao {
             
         }catch (SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
+        
+    }
+     
+     
+     
+      public void DeletarConta(Usuario u) throws SQLException{
+        
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try{
+            stmt = con.prepareStatement("DELETE FROM usuario WHERE id =?");
+ 
+            stmt.setInt(1, IdUser.getLogado());
+            
+            stmt.executeUpdate(); 
+            
+            
+            
+            JOptionPane.showMessageDialog(null, "Conta Apagada");
+            
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro ao apagar");
         } finally{
             ConnectionFactory.closeConnection(con, stmt);
         }

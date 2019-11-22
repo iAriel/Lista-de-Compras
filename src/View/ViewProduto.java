@@ -5,8 +5,14 @@
  */
 package View;
 
+import Controller.IdUser;
+import Dao.UsuarioDao;
 import Model.Produto;
 import Model.ProdutoTableModel;
+import Model.Usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,6 +46,7 @@ public class ViewProduto extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        apagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +86,18 @@ public class ViewProduto extends javax.swing.JFrame {
 
         jLabel4.setText("LISTA DE COMPRAS");
 
+        apagar.setText("APAGAR CONTA");
+        apagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apagarActionPerformed(evt);
+            }
+        });
+        apagar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                apagarKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,23 +105,26 @@ public class ViewProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 305, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(151, 151, 151)
+                        .addComponent(apagar)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(272, 272, 272))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addGap(68, 68, 68)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(apagar))
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -146,6 +168,27 @@ public class ViewProduto extends javax.swing.JFrame {
         System.out.println("linha: "+jTProdutos.getSelectedRow());
     }//GEN-LAST:event_jTProdutosKeyReleased
 
+    private void apagarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_apagarKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_apagarKeyPressed
+
+    private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
+        // TODO add your handling code here:
+        Usuario u = new Usuario();
+        UsuarioDao dao = new UsuarioDao();
+        
+        u.setId(IdUser.getLogado());
+        try {
+            //NAO CONSIGO DEIXAR SOMENTE O DAO.CREATE
+            dao.DeletarConta(u);
+            this.setVisible(false);
+            new ViewLogin().setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewDeleteUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_apagarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -183,6 +226,7 @@ public class ViewProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton apagar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel4;
